@@ -1,0 +1,17 @@
+speedCtrBtn {
+  color: #919191;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+speedCtrBtn:hover {
+  color: #797979;
+}
+
+lessSpeed:hover {
+  color: #7f5b5b;
+}
+
+moreSpeed:hover {
+  color: #5b7f5b;
+}

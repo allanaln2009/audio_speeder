@@ -1,0 +1,26 @@
+{
+  "name": "AudioSpeeder",
+  "description": "Listen your WhatsApp audios faster",
+  "version": "1.0.0",
+  "author": "Állan Lima | Wedge",
+  "homepage_url": "https://github.com/allanaln2009",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icon/icon16.png",
+    "48": "icon/icon48.png",
+    "128": "icon/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web.whatsapp.com/"
+      ],
+      "js": [
+        "index.js"
+      ],
+      "css": [
+        "style.css"
+      ]
+    }
+  ]
+}
