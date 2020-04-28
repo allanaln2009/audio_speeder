@@ -11,7 +11,7 @@ const urlsAccepted = [
 ];
 
 let speed = 1;
-let motherClass, typePlatform, oldHref, checkHref;
+let motherClass, typePlatform, oldHref;
 
 if (url.includes(urlsAccepted[0].url)) {
   typePlatform = 0;
