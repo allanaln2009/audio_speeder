@@ -1,6 +1,6 @@
 {
   "name": "AudioSpeeder",
-  "description": "Listen your WhatsApp audios faster",
+  "description": "Listen your WhatsApp and Instagram audios faster",
   "version": "1.0.0",
   "author": "Állan Lima | Wedge",
   "homepage_url": "https://github.com/allanaln2009",
@@ -13,7 +13,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://web.whatsapp.com/"
+        "https://web.whatsapp.com/",
+        "https://www.instagram.com/direct/*"
       ],
       "js": [
         "index.js"
