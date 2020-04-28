@@ -1,15 +1,57 @@
+const url = window.location.href;
+const urlsAccepted = [
+  {
+    url: "https://web.whatsapp.com/",
+    mainClass: "._3auIg"
+  },
+  {
+    url: "https://www.instagram.com/direct/",
+    mainClass: ".oJZym"
+  }
+];
+
 let speed = 1;
-let header;
+let motherClass, typePlatform, oldHref, checkHref;
+
+if (url.includes(urlsAccepted[0].url)) {
+  typePlatform = 0;
+} else if (url.includes(urlsAccepted[1].url)) {
+  typePlatform = 1;
+
+  function urlHandler() {
+    oldHref = window.location.href;
+    let detect = function () {
+      if (oldHref != window.location.href) {
+        oldHref = window.location.href;
+        let divInstagram = document.querySelector("divAudioSpeeder");
+        if ((!divInstagram || divInstagram === null) && url.includes(urlsAccepted[1].url)) {
+          let intervalInsta = setInterval(() => {
+            if (document.querySelector(urlsAccepted[typePlatform].mainClass)) {
+              clearInterval(intervalInsta);
+              addBtn();
+            }
+          }, 1000);
+        }
+      }
+    };
+    _check = setInterval(() => {
+      detect()
+    }, 1500);
+  }
+  new urlHandler();
+}
+
 
 let interval = setInterval(() => {
-  header = document.querySelector("._3auIg");
-  if (header) {
+  if (document.querySelector(urlsAccepted[typePlatform].mainClass)) {
     clearInterval(interval);
     addBtn();
   }
 }, 1000);
 
 function addBtn() {
+  let header = document.querySelector(urlsAccepted[typePlatform].mainClass);
+
   let lessSpeed = document.createElement("lessSpeed");
   lessSpeed.innerHTML = "≪";
   lessSpeed.addEventListener("click", () => {
@@ -28,14 +70,23 @@ function addBtn() {
     setSpeed();
   });
 
-  header.appendChild(lessSpeed);
-  header.appendChild(speedBtn);
-  header.appendChild(moreSpeed);
+  if (typePlatform === 0) { //WhatsApp
+    header.appendChild(lessSpeed);
+    header.appendChild(speedBtn);
+    header.appendChild(moreSpeed);
+  } else { //Instagram
+    let div = document.createElement("divAudioSpeeder");
+    div.appendChild(lessSpeed);
+    div.appendChild(speedBtn);
+    div.appendChild(moreSpeed);
+    header.appendChild(div);
+  }
+
   refreshBtn();
 }
 
 function setSpeed() {
-  const audios = document.querySelectorAll("audio");
+  let audios = document.querySelectorAll("audio");
   for (let index in audios) {
     audios[index].playbackRate = speed;
   }
@@ -61,6 +112,10 @@ function ctrSpeed(param) {
 }
 
 function refreshBtn() {
+  if (!document.querySelector(".speederBtn")) {
+    return;
+  }
+
   let btnSpeed = document.querySelector(".speederBtn");
   btnSpeed.innerHTML = speed.toFixed(2) + "x";
 }
